@@ -64,9 +64,7 @@ function Cart() {
         console.log("User is not signed up.");
       }
     });
-  }, []);
-
-  console.log(cartProducts);
+  }, );
 
   let Product;
 
