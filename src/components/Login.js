@@ -5,6 +5,7 @@ import { auth } from "../firebase";
 import {toast, ToastContainer} from 'react-toastify'
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { useNavigate } from "react-router-dom";
+import Navbr from "./Navbr";
 
 function Login() {
     const [formdata, setFormdata] = useState({
@@ -36,6 +37,8 @@ function Login() {
     }
 
   return (
+    <>
+    <Navbr/>
     <div className="container bg-light border py-3 my-3">
     <Form>
       <h2>Login</h2>
@@ -57,6 +60,7 @@ function Login() {
         </Button>
     </Form>
   </div>
+  </>
   )
 }
 

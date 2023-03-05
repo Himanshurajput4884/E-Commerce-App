@@ -6,6 +6,8 @@ import Form from "react-bootstrap/Form";
 import { toast, ToastContainer } from 'react-toastify'
 import { auth, db } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import Navbr from "./Navbr";
+
 
 function Signup() {
     const [ formdata, setFormdata ] = useState({
@@ -64,6 +66,8 @@ function Signup() {
     }
 
   return (
+    <>
+    <Navbr/>
     <div className="container bg-light border py-3 my-3">
       <Form>
         <h2>SignUp</h2>
@@ -96,6 +100,7 @@ function Signup() {
         </Button>
       </Form>
     </div>
+    </>
   );
 }
 
