@@ -10,6 +10,7 @@ import { useNavigate } from 'react-router-dom';
 
 function Navbr(props) {
   const user = props.user;
+  const totalProducts = props.totalProducts;
   const navigate = useNavigate();
   const handleLogOut = ()=>{
     auth.signOut()
@@ -40,6 +41,7 @@ function Navbr(props) {
               <Nav.Link >{user}</Nav.Link>
               <Nav.Link href="/cart">
                 <Icon icon={shoppingCart} size={20}/>
+                {totalProducts && <span className='cart-indicator'>{totalProducts}</span>}
               </Nav.Link>
               <Button variant="danger" onClick={handleLogOut}>LogOut</Button>
             </>}

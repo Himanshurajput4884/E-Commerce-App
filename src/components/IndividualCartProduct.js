@@ -39,7 +39,7 @@ function IndividualCartProduct({ value, IncreaseQty, DecreaseQty }) {
       <Card.Body>
         <Card.Title>{value.pname}</Card.Title>
         <Card.Text>
-          <h5>₹ {value.price}</h5>
+          ₹ {value.price}
         </Card.Text>
       </Card.Body>
       <ListGroup className="list-group-flush">

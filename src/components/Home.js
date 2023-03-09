@@ -9,10 +9,10 @@ import {
   query,
 } from "firebase/firestore";
 import Navbr from "./Navbr";
-import AddProducts from "./AddProducts";
 import Products from "./Products";
 import { useNavigate } from "react-router-dom";
 import { toast, ToastContainer } from "react-toastify";
+import Cart from "./Cart";
 
 function Home() {
   const navigate = useNavigate();
@@ -73,7 +73,7 @@ function Home() {
     if (uid !== null) {
       Product = individualProduct;
       Product["qty"] = 1;
-      Product["TotalProductPrice"] = Product.qty * Product.price;
+      Product["TotalProductPrice"] = Product.qty * parseInt(Product.price);
       const CartRef = doc(db, "Cart " + uid, Product.id);
       setDoc(CartRef, Product).then(() => {
         toast.success("Successfully Added to Cart");
@@ -83,17 +83,35 @@ function Home() {
     }
   };
 
+  const [ totalProducts, setTotalProducts ] = useState(0);
+
+  useEffect(()=>{
+    auth.onAuthStateChanged((user)=>{
+      if(user){
+          console.log("active");
+          const CartRef = collection(db, "Cart "+uid);
+          const q = query(CartRef);
+          onSnapshot(q, (snapshot)=>{
+            const qty = snapshot.docs.length;
+            setTotalProducts(qty);
+          })
+      }
+    })
+  });
+
+  console.log(totalProducts);
+
   return (
     <div>
-      <Navbr user={user} />
+      <Navbr user={user} totalProducts={totalProducts}/>
       <ToastContainer />
       <>
         <div className="container bg-light border py-3 my-3">
           {products.length > 0 && (
-            <>
+            <div>
               <h2>All Products</h2>
               <Products products={products} addToCart={addToCart} />
-            </>
+            </div>
           )}
         </div>
         {products.length < 1 && (
